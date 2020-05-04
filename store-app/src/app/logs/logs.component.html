@@ -1,0 +1,69 @@
+<h3>Logs</h3>
+<div>
+
+  <hr>
+<a routerLink="/logs/new" class="btn btn-primary">
+  <span class="glyphicon glyphicon-plus"></span>
+</a>
+</div>
+<br/>
+<div fxLayout="row">
+  <form #f="ngForm">
+    <label>IP</label>
+    <input type="text" style="width: 385px; height: 34px; border-radius: 2%;" id="ip" name="ip"  [ngModel]="ip"
+      required >    
+
+    
+    
+    <label>Início</label>
+    <p-calendar id="inicio" (onSelect)="setDataDe($event)" ></p-calendar>
+    
+    <label>Fim</label>
+    <p-calendar id="fim" (onSelect)="setDataAte($event)"></p-calendar>
+    <button id="search" name="search" type="submit" (click)="pesquisar()"  class="btn btn-primary">
+      <span class="glyphicon glyphicon-search"></span>
+    </button>
+  </form>
+ 
+</div>
+
+  <br>
+  
+
+
+<br>
+<br>
+<div>
+
+  <table class="table table-bordered">
+    <tr>
+      <th class="text-center">Data</th>
+      <th class="text-center">IP</th>
+      <th class="text-center">Request</th>
+      <th class="text-center">Status</th>
+      <th class="text-center">UserAgent</th>
+      <th style="width: 130px;"></th>
+    </tr>
+    
+    <tr *ngFor="let log of logs">
+      <td>{{log.data}}</td>
+      <td class="text-right">{{log.ip}}</td>
+      <td class="text-center">{{log.request}}</td>
+      <td class="text-center">{{log.status}}</td>
+      <td class="text-center">{{log.userAgent}}</td>
+      <td class="text-center" style="width: 250;">
+        <div class="btn-group btn-group-sm">
+          <!-- <a [routerLink]="['/logs', log.id]" class="btn btn-info">
+            <span class="glyphicon glyphicon-info-sign"></span>
+          </a> -->
+          <a [routerLink]="['/logs', log.id, 'edit']" class="btn btn-primary">
+            <span class="glyphicon glyphicon-edit"></span>
+          </a>
+          <a class="btn btn-warning" (click)="onDelete(log.id)">
+            <span class="glyphicon glyphicon-trash"></span>
+          </a>
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>
